@@ -45,10 +45,9 @@ object PluginMain : KotlinPlugin(
         //配置文件目录 "${dataFolder.absolutePath}/"
         val eventChannel = GlobalEventChannel.parentScope(this)
         eventChannel.subscribeAlways<GroupMessageEvent>{
-            group.sendMessage("hi")
-            /*eventChannel.subscribeMessages {
+            eventChannel.subscribeMessages {
                 "跳蚤#BTC"{
-                    reply("物品名：实体比特币\n" +
+                    group.sendMessage("物品名：实体比特币\n" +
                         "当前价格：287390\n" +
                         "24h均价：288471\n" +
                         "7天均价：293910\n" +
@@ -57,13 +56,13 @@ object PluginMain : KotlinPlugin(
                         "来源:tarkov-market.com ｜ 使用指南&反馈&申请入驻: aka.tg/tarkovbot")
                 }
                 "弹药#BTC"{
-                    reply("查询失败，没有此弹药。\n" +
+                    group.sendMessage("查询失败，没有此弹药。\n" +
                         "请按照“口径[空格]弹药名”格式查询，如：\n" +
                         "7.62 BP")
                 }
                 val listener: Listener<MessageEvent> = "1" reply "2"
                 listener.complete()
-            }*/
+            }
             /*
             //复读示例
             if (message.contentToString().startsWith("复读")) {
