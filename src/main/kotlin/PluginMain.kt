@@ -2,13 +2,8 @@ package org.example.mirai.plugin
 
 import net.mamoe.mirai.console.plugin.jvm.JvmPluginDescription
 import net.mamoe.mirai.console.plugin.jvm.KotlinPlugin
-import net.mamoe.mirai.event.EventChannel
-import net.mamoe.mirai.event.GlobalEventChannel
-import net.mamoe.mirai.event.events.BotInvitedJoinGroupRequestEvent
-import net.mamoe.mirai.event.events.FriendMessageEvent
-import net.mamoe.mirai.event.events.GroupMessageEvent
-import net.mamoe.mirai.event.events.NewFriendRequestEvent
-import net.mamoe.mirai.event.globalEventChannel
+import net.mamoe.mirai.event.*
+import net.mamoe.mirai.event.events.*
 import net.mamoe.mirai.message.data.Image
 import net.mamoe.mirai.message.data.Image.Key.queryUrl
 import net.mamoe.mirai.message.data.PlainText
@@ -50,14 +45,24 @@ object PluginMain : KotlinPlugin(
         //配置文件目录 "${dataFolder.absolutePath}/"
         val eventChannel = GlobalEventChannel.parentScope(this)
         eventChannel.subscribeAlways<GroupMessageEvent>{
-            //群消息
-            if(message.contentToString() == "跳蚤#BTC")
-            {
-                group.sendMessage("跳蚤#BTC")
-            }
-            if(message.contentToString() == "弹药#BT")
-            {
-                group.sendMessage("弹药#BT")
+
+            eventChannel.subscribeMessages {
+                "跳蚤#BTC"{
+                    reply("物品名：实体比特币\n" +
+                        "当前价格：287390\n" +
+                        "24h均价：288471\n" +
+                        "7天均价：293910\n" +
+                        "收购商人：Therapist\n" +
+                        "商人收购价：287390(卢布)\n" +
+                        "来源:tarkov-market.com ｜ 使用指南&反馈&申请入驻: aka.tg/tarkovbot")
+                }
+                "弹药#BTC"{
+                    reply("查询失败，没有此弹药。\n" +
+                        "请按照“口径[空格]弹药名”格式查询，如：\n" +
+                        "7.62 BP")
+                }
+                val listener: Listener<MessageEvent> = "1" reply "2"
+                listener.complete()
             }
             /*
             //复读示例
