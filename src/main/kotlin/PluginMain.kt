@@ -1,13 +1,35 @@
 package org.example.mirai.plugin
 
-import net.mamoe.mirai.console.plugin.jvm.JvmPluginDescription
-import net.mamoe.mirai.console.plugin.jvm.KotlinPlugin
 import net.mamoe.mirai.event.*
 import net.mamoe.mirai.event.events.*
-import net.mamoe.mirai.message.data.Image
 import net.mamoe.mirai.message.data.Image.Key.queryUrl
-import net.mamoe.mirai.message.data.PlainText
 import net.mamoe.mirai.utils.info
+//插件信息
+import net.mamoe.mirai.console.plugin.jvm.JvmPluginDescription
+//主类继承
+import net.mamoe.mirai.console.plugin.jvm.KotlinPlugin
+//机器人被拉进群的事件
+import net.mamoe.mirai.event.events.BotInvitedJoinGroupRequestEvent
+//收到好友信息事件
+import net.mamoe.mirai.event.events.FriendMessageEvent
+//收到群消息事件
+import net.mamoe.mirai.event.events.GroupMessageEvent
+//新好友申请事件
+import net.mamoe.mirai.event.events.NewFriendRequestEvent
+//日志组件(logger)发控制台信息函数
+import net.mamoe.mirai.utils.info
+//消息(messageChain)中的图片类型
+import net.mamoe.mirai.message.data.Image
+//消息(messageChain)中的纯文本类型
+import net.mamoe.mirai.message.data.PlainText
+//监听器
+import net.mamoe.mirai.event.Listener
+//监听范围
+import net.mamoe.mirai.event.globalEventChannel
+import net.mamoe.mirai.message.data.toPlainText
+//协程范围?
+import kotlin.coroutines.EmptyCoroutineContext
+
 
 /**
  * 使用 kotlin 版请把
@@ -41,77 +63,101 @@ object PluginMain : KotlinPlugin(
     }
 ) {
     override fun onEnable() {
-        super.onEnable()
         logger.info { "Plugin loaded" }
         //配置文件目录 "${dataFolder.absolutePath}/"
         val eventChannel = GlobalEventChannel.parentScope(this)
         eventChannel.subscribeAlways<GroupMessageEvent>{
-            eventChannel.subscribeMessages {
 
-                //一次消息弹5个
-                "跳蚤#1" reply {
-                    "物品名：1\n" +
-                        "当前价格：1\n" +
-                        "24h均价：1\n" +
-                        "7天均价：1\n" +
-                        "收购商人：1\n" +
-                        "商人收购价：1\n"
-                }
-
-                //未知
-                "跳蚤#2" reply {
-                    "物品名：实体比特币\n当前价格：287390\n24h均价：288471\n7天均价：293910\n收购商人：Therapist\n商人收购价：287390(卢布)"
-                }
-
-                //未知
-                "弹药#BTC" reply {
-                    group.sendMessage("查询失败，没有此弹药。\n" +
-                        "请按照“口径[空格]弹药名”格式查询，如：\n" +
-                        "7.62 BP")
-                }
-
-                //未知
-                "Hello" reply "你三岁小孩吗" // 当消息内容为 "Hello" 时回复 "Hi"
-
-
-
-
-                val listener: Listener<MessageEvent> = "1" reply "2"
-                listener.complete()
-            }
-            /*
-            //复读示例
-            if (message.contentToString().startsWith("复读")) {
-                group.sendMessage(message.contentToString().replace("复读", ""))
-            }
             if (message.contentToString() == "hi") {
                 //群内发送
                 group.sendMessage("hi")
                 //向发送者私聊发送消息
-                sender.sendMessage("hi")
                 //不继续处理
                 return@subscribeAlways
             }
-            //分类示例
-            message.forEach {
-                //循环每个元素在消息里
-                if (it is Image) {
-                    //如果消息这一部分是图片
-                    val url = it.queryUrl()
-                    group.sendMessage("图片，下载地址$url")
-                }
-                if (it is PlainText) {
-                    //如果消息这一部分是纯文本
-                    group.sendMessage("纯文本，内容:${it.content}")
-                }
+
+            if (message.contentToString() == "ss") {
+                //群内发送
+                group.sendMessage("ss")
+                //向发送者私聊发送消息
+                //不继续处理
+                return@subscribeAlways
             }
-            */
+            if (message.contentToString() == "dd") {
+                //群内发送
+                group.sendMessage("ss")
+                group.sendMessage("dd")
+                //向发送者私聊发送消息
+                //不继续处理
+                return@subscribeAlways
+            }
+
+            if (message.contentToString() == "弟弟") {
+                //群内发送
+                group.sendMessage("大")
+                group.sendMessage("d")
+                //向发送者私聊发送消息
+                //不继续处理
+                return@subscribeAlways
+            }
+
+            if (message.contentToString() == "的弟") {
+                //群内发送
+                group.sendMessage("是是")
+                group.sendMessage("dddd")
+                //向发送者私聊发送消息
+                //不继续处理
+                return@subscribeAlways
+            }
+
+            if (message.contentToString() == "d弟") {
+                //群内发送
+                group.sendMessage("大")
+                group.sendMessage("dd")
+                //向发送者私聊发送消息
+                //不继续处理
+                return@subscribeAlways
+            }
+
+            if (message.contentToString() == "dd") {
+                //群内发送
+                group.sendMessage("的s")
+                group.sendMessage("dddd")
+                //向发送者私聊发送消息
+                //不继续处理
+                return@subscribeAlways
+            }
+
+            if (message.contentToString() == "的d") {
+                //群内发送
+                group.sendMessage("的sdds")
+                group.sendMessage("d是d")
+                //向发送者私聊发送消息
+                //sender.sendMessage("的s")
+                //sender.sendMessage("dd")
+                //不继续处理
+                return@subscribeAlways
+            }
+
+            if (message.contentToString() == "的d") {
+                //群内发送
+                group.sendMessage("ddddds")
+                group.sendMessage("d是d")
+                group.sendMessage("dadadads")
+                group.sendMessage("的的1234d")
+                //向发送者私聊发送消息
+                //sender.sendMessage("的s")
+                //sender.sendMessage("dd")
+                //不继续处理
+                return@subscribeAlways
+            }
         }
-        eventChannel.subscribeAlways<FriendMessageEvent>{
+
+        /*eventChannel.subscribeAlways<FriendMessageEvent>{
             //好友信息
-            sender.sendMessage("hi")
+            //sender.sendMessage("hi")
         }
-        /*eventChannel.subscribeAlways<NewFriendRequestEvent>{
+        eventChannel.subscribeAlways<NewFriendRequestEvent>{
             //自动同意好友申请
             accept()
         }
