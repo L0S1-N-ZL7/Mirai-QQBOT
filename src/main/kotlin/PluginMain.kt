@@ -45,8 +45,8 @@ object PluginMain : KotlinPlugin(
         //配置文件目录 "${dataFolder.absolutePath}/"
         val eventChannel = GlobalEventChannel.parentScope(this)
         eventChannel.subscribeAlways<GroupMessageEvent>{
-
-            eventChannel.subscribeMessages {
+            group.sendMessage("hi")
+            /*eventChannel.subscribeMessages {
                 "跳蚤#BTC"{
                     reply("物品名：实体比特币\n" +
                         "当前价格：287390\n" +
@@ -63,7 +63,7 @@ object PluginMain : KotlinPlugin(
                 }
                 val listener: Listener<MessageEvent> = "1" reply "2"
                 listener.complete()
-            }
+            }*/
             /*
             //复读示例
             if (message.contentToString().startsWith("复读")) {
