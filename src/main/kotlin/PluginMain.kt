@@ -47,20 +47,35 @@ object PluginMain : KotlinPlugin(
         val eventChannel = GlobalEventChannel.parentScope(this)
         eventChannel.subscribeAlways<GroupMessageEvent>{
             eventChannel.subscribeMessages {
-                "跳蚤#BTC" reply {
-                    "物品名：实体比特币\n" +
-                        "当前价格：287390\n" +
-                        "24h均价：288471\n" +
-                        "7天均价：293910\n" +
-                        "收购商人：Therapist\n" +
-                        "商人收购价：287390(卢布)\n" +
-                        "来源:tarkov-market.com ｜ 使用指南&反馈&申请入驻: aka.tg/tarkovbot"
+
+                //一次消息弹5个
+                "跳蚤#1" reply {
+                    "物品名：1\n" +
+                        "当前价格：1\n" +
+                        "24h均价：1\n" +
+                        "7天均价：1\n" +
+                        "收购商人：1\n" +
+                        "商人收购价：1\n"
                 }
+
+                //未知
+                "跳蚤#2" reply {
+                    "物品名：实体比特币\n当前价格：287390\n24h均价：288471\n7天均价：293910\n收购商人：Therapist\n商人收购价：287390(卢布)"
+                }
+
+                //未知
                 "弹药#BTC" reply {
-                    "查询失败，没有此弹药。\n" +
+                    group.sendMessage("查询失败，没有此弹药。\n" +
                         "请按照“口径[空格]弹药名”格式查询，如：\n" +
-                        "7.62 BP"
+                        "7.62 BP")
                 }
+
+                //未知
+                "Hello" reply "你三岁小孩吗" // 当消息内容为 "Hello" 时回复 "Hi"
+
+
+
+
                 val listener: Listener<MessageEvent> = "1" reply "2"
                 listener.complete()
             }
