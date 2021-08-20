@@ -63,20 +63,32 @@ object PluginMain : KotlinPlugin(
     }
 ) {
     override fun onEnable() {
+        //变量声明
+        val name = "捞逼特币"
+        val price = "一块六毛五"
+        val avg24hPrice = "一块六毛五"
+        val avg7daysPrice = "一块六毛五"
+        val traderName = "我"
+        val traderPrice = "一块"
         logger.info { "Plugin loaded" }
         //配置文件目录 "${dataFolder.absolutePath}/"
         val eventChannel = GlobalEventChannel.parentScope(this)
         eventChannel.subscribeAlways<GroupMessageEvent>{
-
-            if (message.contentToString() == "hi") {
+            if (message.contentToString() == "跳跳蚤#BTC") {
                 //群内发送
-                group.sendMessage("hi")
+                group.sendMessage("物品名：" +name+"\n"+
+                    "当前价格：" +price+"\n"+
+                    "24h均价：" +avg24hPrice+"\n"+
+                    "7天均价：" +avg7daysPrice+"\n"+
+                    "收购商人：" +traderName+"\n"+
+                    "商人收购价：" +traderPrice+"\n"+
+                    "这个是假的 这个是演鸽在玩")
                 //向发送者私聊发送消息
                 //不继续处理
                 return@subscribeAlways
             }
 
-            if (message.contentToString() == "ss") {
+            if (message.contentToString() == "你妈的") {
                 //群内发送
                 group.sendMessage("ss")
                 //向发送者私聊发送消息
@@ -101,18 +113,20 @@ object PluginMain : KotlinPlugin(
                 return@subscribeAlways
             }
 
-            if (message.contentToString() == "的弟") {
+            if (message.contentToString() == "雨雨雨鸽") {
                 //群内发送
-                group.sendMessage("是是")
-                group.sendMessage("dddd")
+                group.sendMessage("阿拉德大冤种\n" +
+                    "阿拉德大冤种")
+                //group.sendMessage("dddd")
                 //向发送者私聊发送消息
                 //不继续处理
                 return@subscribeAlways
             }
 
-            if (message.contentToString() == "d弟") {
+            if (message.contentToString() == "h4史23夫3a") {
                 //群内发送
-                group.sendMessage("大")
+                group.sendMessage("塔科夫大冤种\n" +
+                    "塔科夫大冤种")
                 group.sendMessage("dd")
                 //向发送者私聊发送消息
                 //不继续处理
