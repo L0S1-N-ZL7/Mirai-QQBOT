@@ -1,5 +1,6 @@
 package org.example.mirai.plugin
 
+import net.mamoe.mirai.Mirai
 import net.mamoe.mirai.event.*
 import net.mamoe.mirai.event.events.*
 import net.mamoe.mirai.message.data.Image.Key.queryUrl
@@ -19,14 +20,16 @@ import net.mamoe.mirai.event.events.NewFriendRequestEvent
 //日志组件(logger)发控制台信息函数
 import net.mamoe.mirai.utils.info
 //消息(messageChain)中的图片类型
-import net.mamoe.mirai.message.data.Image
 //消息(messageChain)中的纯文本类型
-import net.mamoe.mirai.message.data.PlainText
 //监听器
 import net.mamoe.mirai.event.Listener
 //监听范围
 import net.mamoe.mirai.event.globalEventChannel
-import net.mamoe.mirai.message.data.toPlainText
+import net.mamoe.mirai.message.MessageReceipt
+import net.mamoe.mirai.message.data.*
+import net.mamoe.mirai.message.data.MessageSource.Key.quote
+import net.mamoe.mirai.message.data.MessageSource.Key.recall
+import net.mamoe.mirai.message.data.MessageSource.Key.recallIn
 //协程范围?
 import kotlin.coroutines.EmptyCoroutineContext
 
@@ -64,7 +67,8 @@ object PluginMain : KotlinPlugin(
 ) {
     override fun onEnable() {
         //变量声明
-        val name = "捞逼特币"
+
+        val name = ""
         val price = "一块六毛五"
         val avg24hPrice = "一块六毛五"
         val avg7daysPrice = "一块六毛五"
@@ -74,19 +78,23 @@ object PluginMain : KotlinPlugin(
         //配置文件目录 "${dataFolder.absolutePath}/"
         val eventChannel = GlobalEventChannel.parentScope(this)
         eventChannel.subscribeAlways<GroupMessageEvent>{
-            if (message.contentToString() == "跳跳蚤#BTC") {
-                //群内发送
-                group.sendMessage("物品名：" +name+"\n"+
-                    "当前价格：" +price+"\n"+
-                    "24h均价：" +avg24hPrice+"\n"+
-                    "7天均价：" +avg7daysPrice+"\n"+
-                    "收购商人：" +traderName+"\n"+
-                    "商人收购价：" +traderPrice+"\n"+
-                    "这个是假的 这个是演鸽在玩")
-                //向发送者私聊发送消息
-                //不继续处理
-                return@subscribeAlways
-            }
+                    if (message.contentToString() == "跳跳蚤#BTC") {
+                        // Kotlin// this: GroupMessageEvent
+                        group.sendMessage(
+                            message.quote() +
+                                "物品名：" + name + "\n" +
+                                "当前价格：" + price + "\n" +
+                                "24h均价：" + avg24hPrice + "\n" +
+                                "7天均价：" + avg7daysPrice + "\n" +
+                                "收购商人：" + traderName + "\n" +
+                                "商人收购价：" + traderPrice + "\n" +
+                                "这个是假的 这个是演鸽在玩"
+                        ) // 引用收到的消息并回复 "Hi!", 也可以添加图片等更多元素.
+                        //群内发送
+                        //向发送者私聊发送消息
+                        //不继续处理
+                        return@subscribeAlways
+                    }
 
             if (message.contentToString() == "你妈的") {
                 //群内发送
@@ -165,6 +173,7 @@ object PluginMain : KotlinPlugin(
                 //不继续处理
                 return@subscribeAlways
             }
+
         }
 
         /*eventChannel.subscribeAlways<FriendMessageEvent>{
