@@ -1,37 +1,24 @@
 package org.example.mirai.plugin
 
-import net.mamoe.mirai.Mirai
 import net.mamoe.mirai.event.*
-import net.mamoe.mirai.event.events.*
-import net.mamoe.mirai.message.data.Image.Key.queryUrl
 import net.mamoe.mirai.utils.info
 //插件信息
 import net.mamoe.mirai.console.plugin.jvm.JvmPluginDescription
 //主类继承
 import net.mamoe.mirai.console.plugin.jvm.KotlinPlugin
 //机器人被拉进群的事件
-import net.mamoe.mirai.event.events.BotInvitedJoinGroupRequestEvent
 //收到好友信息事件
-import net.mamoe.mirai.event.events.FriendMessageEvent
 //收到群消息事件
 import net.mamoe.mirai.event.events.GroupMessageEvent
 //新好友申请事件
-import net.mamoe.mirai.event.events.NewFriendRequestEvent
 //日志组件(logger)发控制台信息函数
-import net.mamoe.mirai.utils.info
 //消息(messageChain)中的图片类型
 //消息(messageChain)中的纯文本类型
 //监听器
-import net.mamoe.mirai.event.Listener
 //监听范围
-import net.mamoe.mirai.event.globalEventChannel
-import net.mamoe.mirai.message.MessageReceipt
-import net.mamoe.mirai.message.data.*
 import net.mamoe.mirai.message.data.MessageSource.Key.quote
-import net.mamoe.mirai.message.data.MessageSource.Key.recall
-import net.mamoe.mirai.message.data.MessageSource.Key.recallIn
+
 //协程范围?
-import kotlin.coroutines.EmptyCoroutineContext
 
 
 /**
@@ -67,8 +54,8 @@ object PluginMain : KotlinPlugin(
 ) {
     override fun onEnable() {
         //变量声明
-
-        val name = ""
+        val tkvdt = org.example.mirai.plugin.tkvm.DATA()
+        val name = tkvdt.name
         val price = "一块六毛五"
         val avg24hPrice = "一块六毛五"
         val avg7daysPrice = "一块六毛五"
