@@ -56,11 +56,11 @@ object PluginMain : KotlinPlugin(
         //变量声明
         val tkvdt = org.example.mirai.plugin.tkvm.DATA()
         val name = tkvdt.name
-        val price = "一块六毛五"
-        val avg24hPrice = "一块六毛五"
-        val avg7daysPrice = "一块六毛五"
-        val traderName = "我"
-        val traderPrice = "一块"
+        val price = tkvdt.price
+        val avg24hPrice = tkvdt.avg24hPrice
+        val avg7daysPrice = tkvdt.avg7daysPrice
+        val traderName = tkvdt.traderName
+        val traderPrice = tkvdt.traderPrice
         logger.info { "Plugin loaded" }
         //配置文件目录 "${dataFolder.absolutePath}/"
         val eventChannel = GlobalEventChannel.parentScope(this)

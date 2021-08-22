@@ -1,9 +1,13 @@
 package org.example.mirai.plugin.tkvm
 
-import net.mamoe.mirai.data.UserInfo
+
+import java.net.URL
+import com.google.gson.Gson
 
 
-public class DATA{
+class DATA{
+    private var IN = "BTC"
+    val apiResponse = URL("https://tarkov-market.com/api/v1/item?q=$IN&x-api-key=LtqsedrEFLY3vGE5").readText()
     var name:String = "1"
     var shortName:String = "2"
     var price:String = "3"
@@ -14,8 +18,65 @@ public class DATA{
     var traderPrice:String = "8"
 }
 
-fun main(args:Array<String>){
+
+
+fun main(args:Array<String>) {
+
+
     val tkv = DATA()
+    val fff = Gson().toJson(DATA().apiResponse)
+
+    data class Member(
+        val name:String,
+        val shortName:String,
+        val price:String,
+        val basePrice:String,
+        val avg24hPrice:String,
+        val avg7daysPrice:String,
+        val traderName:String,
+        val traderPrice:String,
+    )
+
+    class Response(val member: List<Member>)
+
+    fun parse() {
+        val response = Gson().fromJson(fff, Response::class.java)
+        for (member in response.member){
+            // do something
+
+        }
+    }
+
+
+
+
+
+
+
+
+
+    data class UserInfo(
+        val name:String,
+        val shortName:String,
+        val price:String,
+        val basePrice:String,
+        val avg24hPrice:String,
+        val avg7daysPrice:String,
+        val traderName:String,
+        val traderPrice:String,
+    )
+
+
+
+
+
+
+
+
+
+
+
+    //println(fff)
     println(tkv.name)
     println(tkv.shortName)
     println(tkv.price)
