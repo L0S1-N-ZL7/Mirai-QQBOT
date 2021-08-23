@@ -16,5 +16,6 @@ repositories {
 }
 
 dependencies {
-    implementation("com.google.code.gson:gson:2.8.2")
+    implementation("com.squareup.okhttp3:okhttp:4.9.1")
+    implementation("com.alibaba:fastjson:1.2.9")
 }

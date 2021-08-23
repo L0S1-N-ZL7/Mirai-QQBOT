@@ -1,11 +1,12 @@
 package org.example.mirai.plugin.tkvm
 
 
+import okhttp3.*
+import java.io.IOException
 import java.net.URL
-import com.google.gson.Gson
 
 
-class DATA{
+public class DATA{
     private var IN = "BTC"
     val apiResponse = URL("https://tarkov-market.com/api/v1/item?q=$IN&x-api-key=LtqsedrEFLY3vGE5").readText()
     var name:String = "1"
@@ -22,82 +23,54 @@ class DATA{
 
 fun main(args:Array<String>) {
 
+//    val client = OkHttpClient()
+//    val JSON:MediaType = "application/json".toMediaType()
+//
+//    val json = JSONObject()
+//    json.put("A","1")
+//    json.put("B","2")
+//    json.put("C","3")
 
-    val tkv = DATA()
-    val fff = Gson().toJson(DATA().apiResponse)
+    //var IN = ""
+    val url:String = "https://tarkov-market.com/api/v1/item?q=BTC&x-api-key=LtqsedrEFLY3vGE5"
 
-    data class Member(
-        val name:String,
-        val shortName:String,
-        val price:String,
-        val basePrice:String,
-        val avg24hPrice:String,
-        val avg7daysPrice:String,
-        val traderName:String,
-        val traderPrice:String,
-    )
+    val builder = FormBody.Builder()
+    //builder.add("",  "BTC")
+    val formBody = builder.build()
 
-    class Response(val member: List<Member>)
+    val request = Request.Builder()
+        .method("POST", formBody)
+        .url(url).build()
 
-    fun parse() {
-        val response = Gson().fromJson(fff, Response::class.java)
-        for (member in response.member){
-            // do something
+    val client = OkHttpClient()
 
+    client.newCall(request).enqueue(object : Callback {
+
+        override fun onResponse(call: Call, response: Response) {
+            val result = response.body?.string()
+            println("result：$result")
         }
-    }
 
+        override fun onFailure(call: Call, e: IOException) {
+            println("Failed request api :( " + e.message)
+        }
 
+    })
 
-
-
-
-
-
-
-    data class UserInfo(
-        val name:String,
-        val shortName:String,
-        val price:String,
-        val basePrice:String,
-        val avg24hPrice:String,
-        val avg7daysPrice:String,
-        val traderName:String,
-        val traderPrice:String,
-    )
-
-
-
-
-
-
-
-
-
-
-
-    //println(fff)
-    println(tkv.name)
-    println(tkv.shortName)
-    println(tkv.price)
-    println(tkv.basePrice)
-    println(tkv.avg24hPrice)
-    println(tkv.avg7daysPrice)
-    println(tkv.traderName)
-    println(tkv.traderPrice)
+//    val tkv = DATA()
+//    println()
+//    println(tkv.name)
+//    println(tkv.shortName)
+//    println(tkv.price)
+//    println(tkv.basePrice)
+//    println(tkv.avg24hPrice)
+//    println(tkv.avg7daysPrice)
+//    println(tkv.traderName)
+//    println(tkv.traderPrice)
+    //println(request)
 }
 
 
-//$str = '{"data":[{"id":1,"name":"Zhang","Record":90},{"id":2,"name":"Xiao","Record":85}]}';
-//$arr = json_decode($str);
-//$data = [];
-//foreach ($arr as $value) {
-//    foreach ($value as $val){
-//        if($val->id == 2){
-//        $data = $val;
-//    }
-//    }
-//}
 
 
 //https://tarkov-market.com/api/v1/item?q=btc & x-api-key=LtqsedrEFLY3vGE5
@@ -109,3 +82,17 @@ fun main(args:Array<String>) {
 //GET
 
 
+//class Test {
+//    /**
+//     * status : 0
+//     * intro : byhieg
+//     * shopName : byhige
+//     * message : 查询成功
+//     */
+//    var status = 0
+//    var intro: String? = null
+//    var shopName: String? = null
+//    var message: String? = null
+//}
+
+//var result: Test = Gson().fromJson(response.body().string, Test::class.java)
