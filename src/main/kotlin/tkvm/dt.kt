@@ -29,7 +29,7 @@ fun main(args:Array<String>) {
 //    json.put("B","2")
 //    json.put("C","3")
 
-    var IN = "BTC"
+    var IN = "相控"
     val api = "https://tarkov-market.com/api/v1/item?q=$IN&x-api-key=LtqsedrEFLY3vGE5"
 
     val url = api
@@ -39,8 +39,6 @@ fun main(args:Array<String>) {
         .get() //默认就是GET请求，可以不写
         .build()
     val call = okHttpClient.newCall(request)
-    println(call)
-    println("\n"+"\n"+"\n"+"\n"+"\n"+"\n"+"\n")
     call.enqueue(object : Callback {
         override fun onFailure(call: Call, e: IOException) {
             println("onFailure: ")
@@ -48,7 +46,7 @@ fun main(args:Array<String>) {
 
         @Throws(IOException::class)
         override fun onResponse(call: Call, response: Response) {
-            println("onResponse: " + response.body!!.string())
+            println(response.body!!.string())
         }
     })
 
