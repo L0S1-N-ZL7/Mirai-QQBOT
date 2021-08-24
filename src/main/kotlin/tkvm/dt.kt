@@ -1,6 +1,7 @@
 package org.example.mirai.plugin.tkvm
 
 
+import com.alibaba.fastjson.JSON
 import okhttp3.*
 import java.io.IOException
 import java.net.URL
@@ -47,8 +48,16 @@ fun main(args:Array<String>) {
         @Throws(IOException::class)
         override fun onResponse(call: Call, response: Response) {
             println(response.body!!.string())
+            //response.body!!.string()只能调用一次
+            val text = JSON.toJSONString(response.body!!.string())
+            println(text)
         }
     })
+
+
+
+
+
 
 
 
