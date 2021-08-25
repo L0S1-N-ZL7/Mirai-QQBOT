@@ -108,9 +108,9 @@ fun main(args:Array<String>) {
                 // 根据索引，从JSON数组中直接取出Java对象
                 val person: Test = jsonArray.getObject(i, Test::class.java)
                 // 打印到控制台
-                println(person.name)
-                println(person.price)
-                println(person.shortName)
+                println("名字："+person.name)
+                println("价格："+person.price)
+                println("那啥："+person.shortName)
             }
         }
     })
