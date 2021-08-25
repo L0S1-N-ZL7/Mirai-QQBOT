@@ -47,9 +47,12 @@ fun main(args:Array<String>) {
 
         @Throws(IOException::class)
         override fun onResponse(call: Call, response: Response) {
-            println(response.body!!.string())
+            //println(response.body!!.string())
             //response.body!!.string()只能调用一次
             val text = JSON.toJSONString(response.body!!.string())
+            println(text)
+            println(text)
+            println(text)
             println(text)
         }
     })
