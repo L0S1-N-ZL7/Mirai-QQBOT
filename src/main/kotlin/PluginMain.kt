@@ -10,8 +10,7 @@ import net.mamoe.mirai.console.plugin.jvm.KotlinPlugin
 //收到好友信息事件
 //收到群消息事件
 import net.mamoe.mirai.event.events.GroupMessageEvent
-import net.mamoe.mirai.message.data.MessageChain
-import net.mamoe.mirai.message.data.MessageSource
+import net.mamoe.mirai.message.data.*
 //新好友申请事件
 //日志组件(logger)发控制台信息函数
 //消息(messageChain)中的图片类型
@@ -21,8 +20,6 @@ import net.mamoe.mirai.message.data.MessageSource
 import net.mamoe.mirai.message.data.MessageSource.Key.quote
 import net.mamoe.mirai.message.data.MessageSource.Key.recall
 import net.mamoe.mirai.message.data.MessageSource.Key.recallIn
-import net.mamoe.mirai.message.data.messageChainOf
-import net.mamoe.mirai.message.data.source
 
 //协程范围?
 
@@ -61,13 +58,7 @@ object PluginMain : KotlinPlugin(
     override fun onEnable() {
         //变量声明
         val tkvdt = org.example.mirai.plugin.tkvm.DATA()
-        val name = tkvdt.name
-        val price = tkvdt.price
-        val avg24hPrice = tkvdt.avg24hPrice
-        val avg7daysPrice = tkvdt.avg7daysPrice
-        val traderName = tkvdt.traderName
-        val traderPrice = tkvdt.traderPrice
-        logger.info { "Plugin loaded" }
+        logger.info { "塔科夫WIKI加载完成" }
         //配置文件目录 "${dataFolder.absolutePath}/"
         val eventChannel = GlobalEventChannel.parentScope(this)
         eventChannel.subscribeAlways<GroupMessageEvent>{
@@ -75,12 +66,14 @@ object PluginMain : KotlinPlugin(
                         // Kotlin// this: GroupMessageEvent
                         group.sendMessage(
                             message.quote() +
-                                "物品名：" + name + "\n" +
-                                "当前价格：" + price + "\n" +
-                                "24h均价：" + avg24hPrice + "\n" +
-                                "7天均价：" + avg7daysPrice + "\n" +
-                                "收购商人：" + traderName + "\n" +
-                                "商人收购价：" + traderPrice + "\n"
+                                At(sender) +
+                                "物品名：" + tkvdt.name + "\n" +
+                                "当前价格：" + tkvdt.price + "\n" +
+                                "24h均价：" + tkvdt.avg24hPrice + "\n" +
+                                "7天均价：" + tkvdt.avg7daysPrice + "\n" +
+                                "收购商人：" + tkvdt.traderName + "\n" +
+                                "商人收购价：" + tkvdt.traderPrice + "\n" +
+                                "玩你🐴的垃圾游戏呢😅"
                         )
                         message.recallIn(1)
                         // 引用收到的消息并回复 "Hi!", 也可以添加图片等更多元素.
@@ -93,83 +86,22 @@ object PluginMain : KotlinPlugin(
 
             if (message.contentToString() == "你妈的") {
                 //群内发送
-                group.sendMessage(message.quote() + "弟弟")
+                group.sendMessage(
+                    At(sender) //At((消息.)发送者)
+                        + message.quote() + "弟弟")
                 ////因为message已经被实例化了 所以可以使用message去调用撤回的方法 recallin（1millis 1分钟）
                 message.recallIn(1)
                 //向发送者私聊发送消息
                 //不继续处理
                 return@subscribeAlways
             }
-            if (message.contentToString() == "dd") {
-                //群内发送
-                group.sendMessage("ss")
-                group.sendMessage("dd")
-                //向发送者私聊发送消息
-                //不继续处理
-                return@subscribeAlways
-            }
 
-            if (message.contentToString() == "弟弟") {
-                //群内发送
-                group.sendMessage("大")
-                group.sendMessage("d")
-                //向发送者私聊发送消息
-                //不继续处理
-                return@subscribeAlways
-            }
 
-            if (message.contentToString() == "雨雨雨鸽") {
-                //群内发送
-                group.sendMessage("阿拉德大冤种\n" +
-                    "阿拉德大冤种")
-                //group.sendMessage("dddd")
-                //向发送者私聊发送消息
-                //不继续处理
-                return@subscribeAlways
-            }
 
-            if (message.contentToString() == "h4史23夫3a") {
-                //群内发送
-                group.sendMessage("塔科夫大冤种\n" +
-                    "塔科夫大冤种")
-                group.sendMessage("dd")
-                //向发送者私聊发送消息
-                //不继续处理
-                return@subscribeAlways
-            }
 
-            if (message.contentToString() == "dd") {
-                //群内发送
-                group.sendMessage("的s")
-                group.sendMessage("dddd")
-                //向发送者私聊发送消息
-                //不继续处理
-                return@subscribeAlways
-            }
 
-            if (message.contentToString() == "的d") {
-                //群内发送
-                group.sendMessage("的sdds")
-                group.sendMessage("d是d")
-                //向发送者私聊发送消息
-                //sender.sendMessage("的s")
-                //sender.sendMessage("dd")
-                //不继续处理
-                return@subscribeAlways
-            }
 
-            if (message.contentToString() == "的d") {
-                //群内发送
-                group.sendMessage("ddddds")
-                group.sendMessage("d是d")
-                group.sendMessage("dadadads")
-                group.sendMessage("的的1234d")
-                //向发送者私聊发送消息
-                //sender.sendMessage("的s")
-                //sender.sendMessage("dd")
-                //不继续处理
-                return@subscribeAlways
-            }
+
 
         }
 
