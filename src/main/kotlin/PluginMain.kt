@@ -60,56 +60,13 @@ object PluginMain : KotlinPlugin(
         GlobalEventChannel.subscribeAlways<GroupMessageEvent> {gme-> GroupMessageMonitoring(gme).open()}
         logger.info { "塔科夫WIKI加载完成" }
 
-        //变量声明
-        val tkvdt = org.example.mirai.plugin.tkvm.DATA()
-        //配置文件目录 "${dataFolder.absolutePath}/"
-        val eventChannel = GlobalEventChannel.parentScope(this)
-        eventChannel.subscribeAlways<GroupMessageEvent>{
-                    if (message.contentToString() == "跳蚤#BTC") {
-                        // Kotlin// this: GroupMessageEvent
-                        group.sendMessage(
-                            message.quote() +
-                                At(sender) +
-                                "物品名：" + tkvdt.name + "\n" +
-                                "当前价格：" + tkvdt.price + "\n" +
-                                "24h均价：" + tkvdt.avg24hPrice + "\n" +
-                                "7天均价：" + tkvdt.avg7daysPrice + "\n" +
-                                "收购商人：" + tkvdt.traderName + "\n" +
-                                "商人收购价：" + tkvdt.traderPrice + "\n" +
-                                "玩你🐴的垃圾游戏呢😅"
-                        )
-                        message.recallIn(1)
-                        // 引用收到的消息并回复 "Hi!", 也可以添加图片等更多元素.
-                        //群内发送
-                        //向发送者私聊发送消息
-                        //不继续处理
-                        return@subscribeAlways
-                    }
-
-            if (message.contentToString() == "你妈的") {
-                //群内发送
-                group.sendMessage(
-                    At(sender) //At((消息.)发送者)
-                        + message.quote() + "弟弟")
-                ////因为message已经被实例化了 所以可以使用message去调用撤回的方法 recallin（1millis 1分钟）
-                message.recallIn(1)
-                //向发送者私聊发送消息
-                //不继续处理
-                return@subscribeAlways
-            }
-
-
-
-
-
-
-
-
+        /*eventChannel.subscribeAlways<GroupMessageEvent>{
+            //群消息
+            group.sendMessage("hi")
         }
-
-        /*eventChannel.subscribeAlways<FriendMessageEvent>{
+        eventChannel.subscribeAlways<FriendMessageEvent>{
             //好友信息
-            //sender.sendMessage("hi")
+            sender.sendMessage("hi")
         }
         eventChannel.subscribeAlways<NewFriendRequestEvent>{
             //自动同意好友申请
