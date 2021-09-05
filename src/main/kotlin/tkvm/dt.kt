@@ -26,7 +26,7 @@ class Test {
     var traderPrice: Int? = null
 }
 
-public class DATA{
+class DATA{
     private var IN = "BTC"
     //val apiResponse = URL("https://tarkov-market.com/api/v1/item?q=$IN&x-api-key=LtqsedrEFLY3vGE5").readText()
     var name:String = "BTC"
@@ -41,7 +41,7 @@ public class DATA{
 
 
 
-fun main(args:Array<String>) {
+fun main() {
 
 //    val client = OkHttpClient()
 //    val JSON:MediaType = "application/json".toMediaType()
@@ -51,7 +51,7 @@ fun main(args:Array<String>) {
 //    json.put("B","2")
 //    json.put("C","3")
 
-    var iN = "相控"
+    val iN = "相控"
     val api = "https://tarkov-market.com/api/v1/item?q=$iN&x-api-key=LtqsedrEFLY3vGE5"
 
     val url = api
