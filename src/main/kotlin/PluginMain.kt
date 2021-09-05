@@ -56,9 +56,12 @@ object PluginMain : KotlinPlugin(
     }
 ) {
     override fun onEnable() {
+
+        GlobalEventChannel.subscribeAlways<GroupMessageEvent> {gme-> GroupMessageMonitoring(gme).open()}
+        logger.info { "塔科夫WIKI加载完成" }
+
         //变量声明
         val tkvdt = org.example.mirai.plugin.tkvm.DATA()
-        logger.info { "塔科夫WIKI加载完成" }
         //配置文件目录 "${dataFolder.absolutePath}/"
         val eventChannel = GlobalEventChannel.parentScope(this)
         eventChannel.subscribeAlways<GroupMessageEvent>{
@@ -82,7 +85,6 @@ object PluginMain : KotlinPlugin(
                         //不继续处理
                         return@subscribeAlways
                     }
-
 
             if (message.contentToString() == "你妈的") {
                 //群内发送

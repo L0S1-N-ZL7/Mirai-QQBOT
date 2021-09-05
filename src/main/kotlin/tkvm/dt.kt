@@ -52,12 +52,11 @@ fun main() {
 //    json.put("C","3")
 
     val iN = "相控"
-    val api = "https://tarkov-market.com/api/v1/item?q=$iN&x-api-key=LtqsedrEFLY3vGE5"
+    val apiurl = "https://tarkov-market.com/api/v1/item?q=$iN&x-api-key=LtqsedrEFLY3vGE5"
 
-    val url = api
     val okHttpClient = OkHttpClient()
     val request: Request = Request.Builder()
-        .url(url)
+        .url(apiurl)
         .get() //默认就是GET请求，可以不写
         .addHeader("Content-Type", "application/json")
         .build()
