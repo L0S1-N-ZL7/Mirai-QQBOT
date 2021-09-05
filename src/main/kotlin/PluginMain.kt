@@ -90,6 +90,7 @@ object PluginMain : KotlinPlugin(
                         return@subscribeAlways
                     }
 
+
             if (message.contentToString() == "你妈的") {
                 //群内发送
                 group.sendMessage(message.quote() + "弟弟")
