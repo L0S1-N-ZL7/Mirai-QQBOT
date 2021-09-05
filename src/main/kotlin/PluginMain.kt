@@ -41,9 +41,9 @@ import net.mamoe.mirai.message.data.MessageSource.Key.recallIn
 
 object PluginMain : KotlinPlugin(
     JvmPluginDescription(
-        id = "org.example.mirai-example",
-        name = "插件示例",
-        version = "0.1.0"
+        id = "tkv.chuib.mirai-example",
+        name = "tkv.chuib",
+        version = "0.1.1"
     ) {
         author("作者名称或联系方式")
         info(
