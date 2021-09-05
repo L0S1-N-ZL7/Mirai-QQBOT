@@ -10,6 +10,8 @@ import net.mamoe.mirai.console.plugin.jvm.KotlinPlugin
 //收到好友信息事件
 //收到群消息事件
 import net.mamoe.mirai.event.events.GroupMessageEvent
+import net.mamoe.mirai.message.data.MessageChain
+import net.mamoe.mirai.message.data.MessageSource
 //新好友申请事件
 //日志组件(logger)发控制台信息函数
 //消息(messageChain)中的图片类型
@@ -17,6 +19,10 @@ import net.mamoe.mirai.event.events.GroupMessageEvent
 //监听器
 //监听范围
 import net.mamoe.mirai.message.data.MessageSource.Key.quote
+import net.mamoe.mirai.message.data.MessageSource.Key.recall
+import net.mamoe.mirai.message.data.MessageSource.Key.recallIn
+import net.mamoe.mirai.message.data.messageChainOf
+import net.mamoe.mirai.message.data.source
 
 //协程范围?
 
@@ -65,7 +71,7 @@ object PluginMain : KotlinPlugin(
         //配置文件目录 "${dataFolder.absolutePath}/"
         val eventChannel = GlobalEventChannel.parentScope(this)
         eventChannel.subscribeAlways<GroupMessageEvent>{
-                    if (message.contentToString() == "跳跳蚤#BTC") {
+                    if (message.contentToString() == "跳蚤#BTC") {
                         // Kotlin// this: GroupMessageEvent
                         group.sendMessage(
                             message.quote() +
@@ -74,9 +80,10 @@ object PluginMain : KotlinPlugin(
                                 "24h均价：" + avg24hPrice + "\n" +
                                 "7天均价：" + avg7daysPrice + "\n" +
                                 "收购商人：" + traderName + "\n" +
-                                "商人收购价：" + traderPrice + "\n" +
-                                "这个是假的 这个是演鸽在玩"
-                        ) // 引用收到的消息并回复 "Hi!", 也可以添加图片等更多元素.
+                                "商人收购价：" + traderPrice + "\n"
+                        )
+                        message.recallIn(1)
+                        // 引用收到的消息并回复 "Hi!", 也可以添加图片等更多元素.
                         //群内发送
                         //向发送者私聊发送消息
                         //不继续处理
@@ -85,7 +92,9 @@ object PluginMain : KotlinPlugin(
 
             if (message.contentToString() == "你妈的") {
                 //群内发送
-                group.sendMessage("ss")
+                group.sendMessage(message.quote() + "弟弟")
+                ////因为message已经被实例化了 所以可以使用message去调用撤回的方法 recallin（1millis 1分钟）
+                message.recallIn(1)
                 //向发送者私聊发送消息
                 //不继续处理
                 return@subscribeAlways
