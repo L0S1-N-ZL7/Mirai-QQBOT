@@ -1,21 +1,19 @@
 package org.example.mirai.plugin.tkvm
 
 
-//import jogamp.graph.font.typecast.ot.table.Table.post
-
 import com.alibaba.fastjson.JSON
 import com.alibaba.fastjson.JSONObject
 import okhttp3.*
 import java.io.IOException
 
+//class ResultBean(
+//    val ch: String,
+//    val status: String,
+//    val ts: String,
+//    val data: List<DATA>
+//)
 
-class Test {
-    /**
-     * status : 0
-     * intro : byhieg
-     * shopName : byhige
-     * message : 查询成功
-     */
+class DATA{
     var name: String? = null
     var shortName: String? = null
     var price: Int? = null
@@ -26,22 +24,10 @@ class Test {
     var traderPrice: Int? = null
 }
 
-class DATA{
-    private var IN = "BTC"
-    //val apiResponse = URL("https://tarkov-market.com/api/v1/item?q=$IN&x-api-key=LtqsedrEFLY3vGE5").readText()
-    var name:String = "BTC"
-    var shortName:String = "BTC"
-    var price:String = "BTC"
-    var basePrice:String = "BTC"
-    var avg24hPrice:String = "BTC"
-    var avg7daysPrice:String = "BTC"
-    var traderName:String = "BTC"
-    var traderPrice:String = "BTC"
-}
 
 
-
-fun main() {
+//fun main(iN:String):ResultBean? {
+fun main(iN:String) {
 
 //    val client = OkHttpClient()
 //    val JSON:MediaType = "application/json".toMediaType()
@@ -51,12 +37,11 @@ fun main() {
 //    json.put("B","2")
 //    json.put("C","3")
 
-    val iN = "相控"
-    val apiurl = "https://tarkov-market.com/api/v1/item?q=$iN&x-api-key=LtqsedrEFLY3vGE5"
+    val api_url = "https://tarkov-market.com/api/v1/item?q=$iN&x-api-key=LtqsedrEFLY3vGE5"
 
     val okHttpClient = OkHttpClient()
     val request: Request = Request.Builder()
-        .url(apiurl)
+        .url(api_url)
         .get() //默认就是GET请求，可以不写
         .addHeader("Content-Type", "application/json")
         .build()
@@ -105,7 +90,7 @@ fun main() {
             // 遍历JSON数组
             for (i in jsonArray.indices) {
                 // 根据索引，从JSON数组中直接取出Java对象
-                val person: Test = jsonArray.getObject(i, Test::class.java)
+                val person: DATA = jsonArray.getObject(i, DATA::class.java)
                 // 打印到控制台
                 println("名字："+person.name)
                 println("价格："+person.price)
