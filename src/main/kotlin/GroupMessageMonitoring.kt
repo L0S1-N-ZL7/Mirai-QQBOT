@@ -5,6 +5,7 @@ import net.mamoe.mirai.message.data.MessageChain
 import net.mamoe.mirai.message.data.MessageSource.Key.quote
 import net.mamoe.mirai.message.data.content
 import net.mamoe.mirai.message.data.toPlainText
+import org.example.mirai.plugin.tkvm.Tkv
 
 class GroupMessageMonitoring(gme:GroupMessageEvent) {
     var gme = gme
@@ -19,19 +20,21 @@ class GroupMessageMonitoring(gme:GroupMessageEvent) {
                 return
             } else if (split.size == 2) {
 
-                val tkvdt = org.example.mirai.plugin.tkvm.DATA()
-                val tp = org.example.mirai.plugin.tkvm.main(split[1])
+                val tp = Tkv().main(split[1])
 
                 if (tp != null) {
+
+                    val data = tp.data.get(0)
+
                     gme.group.sendMessage(
                             At(gme.sender).plus("\n").plus(
                                 """
-                            物品名：${tkvdt.name}
-                            当前价格：${tkvdt.price}
-                            24h均价：${tkvdt.avg24hPrice}
-                            7天均价：${tkvdt.avg7daysPrice}
-                            收购商人：${tkvdt.traderName}
-                            商人收购价：${tkvdt.traderPrice}
+                            物品名：${data.name}
+                            当前价格：${data.price}
+                            24h均价：${data.avg24hPrice}
+                            7天均价：${data.avg7daysPrice}
+                            收购商人：${data.traderName}
+                            商人收购价：${data.traderPrice}
                             玩你🐴的垃圾游戏呢😅
                             """.trimIndent()
                             )
