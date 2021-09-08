@@ -3,6 +3,7 @@ package org.example.mirai.plugin.tkvm
 
 import com.alibaba.fastjson.JSON
 import com.alibaba.fastjson.JSONObject
+import com.google.gson.Gson
 import okhttp3.*
 import java.io.IOException
 
@@ -40,11 +41,17 @@ fun main(iN:String): ResultBean? {
 //    json.put("B","2")
 //    json.put("C","3")
 
-    val api_url = "https://tarkov-market.com/api/v1/item?q=$iN&x-api-key=LtqsedrEFLY3vGE5"
+//    val client = OkHttpClient()
+//    val request = Request.Builder().url("https://tarkov-market.com/api/v1/item?q=$iN&x-api-key=LtqsedrEFLY3vGE5").get().build()
+//    val call = client.newCall(request)
+//    val string = call.execute().body?.string()
+//    return Gson().fromJson(string, ResultBean::class.java)
+
+    val apiurl = "https://tarkov-market.com/api/v1/item?q=$iN&x-api-key=LtqsedrEFLY3vGE5"
 
     val okHttpClient = OkHttpClient()
     val request: Request = Request.Builder()
-        .url(api_url)
+        .url(apiurl)
         .get() //默认就是GET请求，可以不写
         .addHeader("Content-Type", "application/json")
         .build()
