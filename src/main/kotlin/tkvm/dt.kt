@@ -34,18 +34,12 @@ class Tkv{
 fun main(iN:String): ResultBean? {
 
 //    val client = OkHttpClient()
-//    val JSON:MediaType = "application/json".toMediaType()
-//
-//    val json = JSONObject()
-//    json.put("A","1")
-//    json.put("B","2")
-//    json.put("C","3")
-
-//    val client = OkHttpClient()
 //    val request = Request.Builder().url("https://tarkov-market.com/api/v1/item?q=$iN&x-api-key=LtqsedrEFLY3vGE5").get().build()
 //    val call = client.newCall(request)
 //    val string = call.execute().body?.string()
 //    return Gson().fromJson(string, ResultBean::class.java)
+
+//var result: Test = Gson().fromJson(response.body().string, Test::class.java)
 
     val apiurl = "https://tarkov-market.com/api/v1/item?q=$iN&x-api-key=LtqsedrEFLY3vGE5"
 
@@ -110,47 +104,7 @@ fun main(iN:String): ResultBean? {
     })
 
 
-//    //var IN = ""
-//    val url:String = "https://tarkov-market.com/api/v1/item?q=BTC&x-api-key=LtqsedrEFLY3vGE5"
-//
-//    val builder = FormBody.Builder()
-//    //builder.add("",  "BTC")
-//    val formBody = builder.build()
-//
-//    val request = Request.Builder()
-//        .method("POST", formBody)
-//        .url(url).build()
-//
-//    val client = OkHttpClient()
-//
-//    client.newCall(request).enqueue(object : Callback {
-//
-//        override fun onResponse(call: Call, response: Response) {
-//            val result = response.body?.string()
-//            println("result：$result")
-//        }
-//
-//        override fun onFailure(call: Call, e: IOException) {
-//            println("Failed request api :( " + e.message)
-//        }
-//
-//    })
-
-//    val tkv = DATA()
-//
-//    println(tkv.name)
-//    println(tkv.shortName)
-//    println(tkv.price)
-//    println(tkv.basePrice)
-//    println(tkv.avg24hPrice)
-//    println(tkv.avg7daysPrice)
-//    println(tkv.traderName)
-//    println(tkv.traderPrice)
-    //println(request)
     return null
 }
 
 }
-
-
-//var result: Test = Gson().fromJson(response.body().string, Test::class.java)
