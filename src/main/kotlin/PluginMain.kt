@@ -57,7 +57,7 @@ object PluginMain : KotlinPlugin(
 ) {
     override fun onEnable() {
 
-        GlobalEventChannel.subscribeAlways<GroupMessageEvent> {gme-> GroupMessageMonitoring(gme).open()}
+        //GlobalEventChannel.subscribeAlways<GroupMessageEvent> {gme-> GroupMessageMonitoring(gme).open()}
         logger.info { "塔科夫WIKI加载完成" }
 
         /*eventChannel.subscribeAlways<GroupMessageEvent>{

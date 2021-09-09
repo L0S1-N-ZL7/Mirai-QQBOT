@@ -9,7 +9,7 @@ import java.io.IOException
 
 
 
-class Tkv{
+/*class Tkv{
 
     data class ResultBean(
         val ch: String,
@@ -29,25 +29,42 @@ class Tkv{
         var traderPrice: Int
     )
 
+}*/
+
+class DATA {
+    var name: String? = null
+    var shortName: String? = null
+    var price: Int? = null
+    var basePrice: Int? = null
+    var avg24hPrice: Int? = null
+    var avg7daysPrice: Int? = null
+    var traderName: String? = null
+    var traderPrice: Int? = null
+}
 
 
-fun main(iN:String): ResultBean? {
+//fun main(iN:String): Tkv.ResultBean? {
+    fun main(args:Array<String>){
 
 //    val client = OkHttpClient()
-//    val request = Request.Builder().url("https://tarkov-market.com/api/v1/item?q=$iN&x-api-key=LtqsedrEFLY3vGE5").get().build()
+//    val request = Request.Builder().url("https://tarkov-market.com/api/v1/item?q=iN&lang=cn&x-api-key=LtqsedrEFLY3vGE5").get().build()
 //    val call = client.newCall(request)
 //    val string = call.execute().body?.string()
 //    return Gson().fromJson(string, ResultBean::class.java)
 
 //var result: Test = Gson().fromJson(response.body().string, Test::class.java)
 
-    val apiurl = "https://tarkov-market.com/api/v1/item?q=$iN&x-api-key=LtqsedrEFLY3vGE5"
+    var iN = "比特币"
+    val apiurl = "https://tarkov-market.com/api/v1/item?q=$iN&lang=cn"
 
     val okHttpClient = OkHttpClient()
     val request: Request = Request.Builder()
         .url(apiurl)
         .get() //默认就是GET请求，可以不写
+        .addHeader("x-api-key","LtqsedrEFLY3vGE5")
         .addHeader("Content-Type", "application/json")
+        // .addHeader("q",iN)
+        // .addHeader("lang","cn")
         .build()
     val call = okHttpClient.newCall(request)
     call.enqueue(object : Callback {
@@ -104,7 +121,5 @@ fun main(iN:String): ResultBean? {
     })
 
 
-    return null
-}
-
+//    return null
 }
