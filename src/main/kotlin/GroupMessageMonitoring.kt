@@ -20,7 +20,7 @@ class GroupMessageMonitoring(gme:GroupMessageEvent) {
                 return
             } else if (split.size == 2) {
 
-                val tp = Tkv().main(split[1])
+              val tp = Tkv().main(split[1])
 
                 if (tp != null) {
 

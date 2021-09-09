@@ -147,20 +147,10 @@ fun main(iN:String): ResultBean? {
 //    println(tkv.traderName)
 //    println(tkv.traderPrice)
     //println(request)
+    return null
 }
 
-
 }
-
-//https://tarkov-market.com/api/v1/item?q=btc & x-api-key=LtqsedrEFLY3vGE5
-//
-//https://tarkov-market.com/api/v1/item?q=btc
-//
-//x-api-key:LtqsedrEFLY3vGE5
-//
-//GET
-
-
 
 
 //var result: Test = Gson().fromJson(response.body().string, Test::class.java)
